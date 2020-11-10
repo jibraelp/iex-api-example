@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <h2>The Data Can't Be Loaded</h2>
+    </body>
+</html>
+
+<script>
+    // [INIT] //
+    const baseUrl = `https://sandbox.iexapis.com`
+    const symbols = 'ethusdt'
+    const types = 'book'
+    const token = ''
+    const url = `${baseUrl}/stable/stock/market/batch?symbols=${symbols}&types=${types}&token=${token}`
+
+    // [XMLHttpRequest] //
+    // allows to send http requests
+    const myRequest = new XMLHttpRequest('GET', url)
+
+
+    // [REQUEST] //
+    // create request and send it
+    myRequest.open('GET', url)
+    myRequest.send()
+
+
+    // [ON-DATA] //
+    myRequest.onload = function() {
+        const IEXData = JSON.parse(myRequest.responseText)
+        
+        // [LOG] //
+        console.log('IEXData:', IEXData)
+
+        // [INSERT] //
+        document.body.innerHTML = JSON.stringify(IEXData)
+    }
+</script>
